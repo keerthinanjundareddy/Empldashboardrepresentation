@@ -14,7 +14,7 @@ const Employeedatagraph = () => {
 //    all these are from the chartjs readymade code
     var data= {
         // down headings
-      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ],
+      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       datasets: [{
         label: '# of Votes',
         data: [12, 19, 3, 5, 2, 3],
@@ -37,11 +37,9 @@ const Employeedatagraph = () => {
             'rgb(201, 203, 207)'
           ],
           borderWidth: 1,
-          barPercentage: 0.6,
+          borderRadius: 4,
           categoryPercentage: 0.6,
-          // barThickness: 20,
-          // maxBarThickness: 20,
-          minBarLength: 2,
+          barPercentage: 0.5,
        }]
        }
 
@@ -69,8 +67,8 @@ const Employeedatagraph = () => {
         },
         layout: {
             padding: {
-              left: 80,  // Adjust the left padding to control the space between the left edge and the data
-              right: 80,
+              left: 20,  // Adjust the left padding to control the space between the left edge and the data
+              right:20,
               top:100,
               // Adjust the right padding to control the space between the right edge and the data
             },
@@ -78,18 +76,20 @@ const Employeedatagraph = () => {
         // we can configure legend aswell...legend takes an object
         legend:{
             labels:{
-            fontSize:26,
+            fontSize:0.1,
             }
         }
       }
   return (
     <>
-    <div style={{textAlign:"center",marginTop:"20px",textTransform:"uppercase"}}>Employee weekly status </div>
+    <div style={{textAlign:"center",marginTop:"20px",textTransform:"uppercase"}}><b>Employee weekly status</b> </div>
     <div>
       <Bar
       height={400}
+      width={100}
       data={data}
       options={options}
+    
      
       />
       </div>
