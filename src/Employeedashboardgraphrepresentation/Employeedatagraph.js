@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react';
+import './Employeedatagraph.css'
+
+import imageone from '../Assets/240_F_403181548_94NP0b7ooowJRzB2srpIewpYI0rYTCsS.jpg'
+import imagetwo from '../../src/Assets/up-arrow.png'
 // helps to bring bar elements and scale has to be included to avoid errors
 
 import {Chart as ChartJS, BarElement,CategoryScale,LinearScale} from 'chart.js'
@@ -12,6 +16,44 @@ import {Bar}  from 'react-chartjs-2'
      )
 const Employeedatagraph = () => {
 //    all these are from the chartjs readymade code
+const optionstwo = [
+ 'rachana',
+ 'keerthana',
+ 'kavya',
+ 'bhavya',
+ 'pradeepthi',
+ 'naghma',
+ 'suneel',
+ 'pannaga',
+ 'digant',
+ 'swaroop',
+ 'bharat',
+ 'nahusha',
+ 'sharan ',
+ 'nandan',
+ 'nandeesha',
+ 'madhan',
+
+  // Add more options here
+];
+const [selectedOption, setSelectedOption] = useState('');
+const [popupopen, setPopupopen] = useState(false);
+
+const toggleDropdown = () => {
+  setPopupopen(!popupopen);
+};
+
+const handleOptionClick = (option) => {
+  setSelectedOption(option);
+  console.log("selected option",selectedOption)
+  setPopupopen(false); // Close the dropdown
+};
+
+
+useEffect(() => {
+  console.log("selected option in useeffect", selectedOption);
+}, [selectedOption]);
+
     var data= {
         // down headings
       labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -67,8 +109,8 @@ const Employeedatagraph = () => {
         },
         layout: {
             padding: {
-              left: 20,  // Adjust the left padding to control the space between the left edge and the data
-              right:20,
+              left: 40,  // Adjust the left padding to control the space between the left edge and the data
+              right:40,
               top:100,
               // Adjust the right padding to control the space between the right edge and the data
             },
@@ -83,12 +125,39 @@ const Employeedatagraph = () => {
   return (
     <>
     <div style={{textAlign:"center",marginTop:"20px",textTransform:"uppercase"}}><b>Employee weekly status</b> </div>
-    <div>
+   
+
+    <div style={{ position: 'relative',marginTop:"10px" ,marginLeft:"10px"}}>
+  <div onClick={toggleDropdown} style={{ border: '1px solid grey', width: '200px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between' }}>
+    <div>{selectedOption || 'Select'}</div>
+    <div>{popupopen ? <div style={{ width: '20px', height: '20px' }}><img src={imagetwo} alt="cc" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div> : <div style={{ width: '20px', height: '20px' }}> <img src={imageone} alt="cc" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> </div>}</div>
+  </div>
+  {popupopen && (
+    <div className="scrollable-options">
+      <div className="options-container">
+        <ul className="options-list">
+          {optionstwo.map((option, index) => (
+            <li key={index} className="option" onClick={() => handleOptionClick(option)}>
+              {option}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )}
+</div>
+
+
+
+    <div style={{marginTop:"130px"}}>
       <Bar
       height={400}
       width={100}
       data={data}
       options={options}
+      
+     
+      
     
      
       />
